@@ -1,6 +1,11 @@
-/*! Fixed Scroller - v0.1.0 - 2013-12-02
-* https://github.com/gfreezy/fixed-scroller
-* Copyright (c) 2013 Alex.F; Licensed MIT */
+/*
+  fixed-scroller
+  https://github.com/gfreezy/fixed-scroller
+  Copyright (c) 2013 Alex.F
+  Licensed under the MIT license.
+*/
+
+
 (function() {
   (function($, window, document) {
     /*

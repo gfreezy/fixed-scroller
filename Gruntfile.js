@@ -21,9 +21,9 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/<%= pkg.name %>.js'],
+        src: ['dist/<%= pkg.name %>.coffee.js'],
         dest: 'dist/<%= pkg.name %>.js'
-      },
+      }
     },
     uglify: {
       options: {
@@ -32,10 +32,7 @@ module.exports = function(grunt) {
       dist: {
         src: '<%= concat.dist.dest %>',
         dest: 'dist/<%= pkg.name %>.min.js'
-      },
-    },
-    qunit: {
-      files: ['test/**/*.html']
+      }
     },
     jshint: {
       gruntfile: {
@@ -43,19 +40,7 @@ module.exports = function(grunt) {
           jshintrc: '.jshintrc'
         },
         src: 'Gruntfile.js'
-      },
-      src: {
-        options: {
-          jshintrc: 'src/.jshintrc'
-        },
-        src: ['src/**/*.js']
-      },
-      test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
-        src: ['test/**/*.js']
-      },
+      }
     },
     watch: {
       gruntfile: {
@@ -63,25 +48,37 @@ module.exports = function(grunt) {
         tasks: ['jshint:gruntfile']
       },
       src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
-      },
+        files: '<%= coffee.compile.files %>',
+        tasks: ['coffeelint']
+      }
     },
+    coffee: {
+      compile: {
+        files: [
+          { dest: 'dist/<%= pkg.name %>.coffee.js', src: '<%= coffeelint.app %>' }
+        ]
+      }
+    },
+    coffeelint: {
+      options: {
+        'no_trailing_whitespace': {
+          'level': 'error'
+        }
+      },
+      app: ['src/<%= pkg.name %>.coffee']
+    }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-coffeelint');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('default', ['coffeelint', 'jshint', 'clean', 'coffee:compile', 'concat', 'uglify']);
 
 };
