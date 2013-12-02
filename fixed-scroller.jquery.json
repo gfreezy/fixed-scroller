@@ -1,0 +1,26 @@
+{
+  "name": "fixed-scroller",
+  "title": "Fixed Scroller",
+  "description": "jQuery plugin for Xiachufang like scrolling effect.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/gfreezy/fixed-scroller",
+  "author": {
+    "name": "Alex.F",
+    "email": "gfreezy@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gfreezy/fixed-scroller.git"
+  },
+  "bugs": "https://github.com/gfreezy/fixed-scroller/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/gfreezy/fixed-scroller/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}
